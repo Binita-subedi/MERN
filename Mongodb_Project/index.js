@@ -35,17 +35,24 @@ res.send(details)
   }
   
  })
+ //  res.write("<h1>The Patients Details");
+//   res.send();
+  
+})
 
- app.post("/",function(req,res){
+ app.post("/", function(req,res){
+  const value_new = new Patients({
+   first_name: string(req.body.first_name),
+   last_name: string(req.body.last_name),
+   email_address: string(req.body.email_address),
+   room_no: string(req.body.room_no)
+  });
+  value_new.save();
+  
    console.log(req.body.first_name);
    console.log(req.body.last_name);
    console.log(req.body.email_address);
    console.log(req.body.room_no);
- })
- 
-//  res.write("<h1>The Patients Details");
-//   res.send();
-  
 })
  
 
