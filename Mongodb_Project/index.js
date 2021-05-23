@@ -41,11 +41,11 @@ res.send(details)
 })
 
  app.post("/", function(req,res){
-  const value_new = new Patients({
-   first_name: string(req.body.first_name),
-   last_name: string(req.body.last_name),
-   email_address: string(req.body.email_address),
-   room_no: string(req.body.room_no)
+  const value_new = Patients({
+   first_name: String(req.body.first_name),
+   last_name: String(req.body.last_name),
+   email_address: String(req.body.email_address),
+   room_no: String(req.body.room_no)
   });
   value_new.save();
   
@@ -53,6 +53,15 @@ res.send(details)
    console.log(req.body.last_name);
    console.log(req.body.email_address);
    console.log(req.body.room_no);
+})
+
+app.delete("/",function(req,res){
+  Patients.deleteMany(function(err){
+    if(!err){
+      console.log("all the details has been deleted"); 
+    }
+  })
+
 })
  
 
