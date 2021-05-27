@@ -77,6 +77,17 @@ app.get("/patients/:patientsfirst_name",function(req,res){
   })
 
 });
+
+app.delete("/patients/:patientsfirst_name",function(req,res){
+  Patients.deleteOne({first_name: req.params.patientsfirst_name},function(err){
+    if(!err){
+      console.log("the details of one patients has been deleted");
+    }
+  })
+})
+
+
+
  
 
 app.listen(3000,function(){
