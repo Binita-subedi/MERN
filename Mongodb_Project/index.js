@@ -67,7 +67,10 @@ app.delete("/patients",function(req,res){
 
 app.get("/patients/:patientsfirst_name",function(req,res){
   Patients.findOne({first_name: req.params.patientsfirst_name},function(err,onepatient){
-    if(!err){console.log(onepatient);}
+    if(!err){console.log(onepatient);
+      const onegetpatients = JSON.stringify(onepatient);
+      res.send(onegetpatients);
+    }
     else{
       console.log(err);
     }
