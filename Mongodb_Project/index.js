@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
 const ejs = require("ejs");
+const { request } = require( "express" );
 const app = express();
 
 app.use(bodyparser.urlencoded({extended: true}));
@@ -21,7 +22,7 @@ const schema = {
 };
 
 const Patients = mongoose.model("patients details",schema);
-app.get("/",function(req,res){
+app.get("/patients",function(req,res){
  Patients.find(function(err,patients){
   if(patients){
 console.log(patients);
@@ -40,7 +41,7 @@ res.send(details)
   
 })
 
- app.post("/", function(req,res){
+ app.post("/patients", function(req,res){
   const value_new = Patients({
    first_name: String(req.body.first_name),
    last_name: String(req.body.last_name),
@@ -55,7 +56,7 @@ res.send(details)
    console.log(req.body.room_no);
 })
 
-app.delete("/",function(req,res){
+app.delete("/patients",function(req,res){
   Patients.deleteMany(function(err){
     if(!err){
       console.log("all the details has been deleted"); 
@@ -63,9 +64,19 @@ app.delete("/",function(req,res){
   })
 
 })
+
+app.get("/patients/:patientsfirst_name",function(req,res){
+  Patients.findOne({first_name: req.params.patientsfirst_name},function(err,onepatient){
+    if(!err){console.log(onepatient);}
+    else{
+      console.log(err);
+    }
+  })
+
+});
  
 
 app.listen(3000,function(){
 
   console.log("this server is up and running");
-});
+});  
